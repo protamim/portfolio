@@ -1,7 +1,7 @@
 import workplace from "../assets/workplace.jpg";
 import { FaDownload, FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import ExampleFileDownload from "../assets/demo.txt";
+import ExampleFileDownload from "../../public/assignment_category_0001.pdf";
 import { TypeAnimation } from "react-type-animation";
 
 const Banner = () => {
@@ -124,7 +124,7 @@ const Banner = () => {
               <a
                 className=" flex gap-3 items-center border border-green-600 py-2 px-5 rounded-full hover:bg-green-600 hover:text-black transition-all"
                 href={ExampleFileDownload}
-                download="Example-Txt-document"
+                download="Example-PDF-document"
                 target="_blank"
                 rel="noreferrer"
               >

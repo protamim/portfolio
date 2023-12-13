@@ -1,18 +1,46 @@
 import { FaEnvelope, FaFacebook, FaGithub } from "react-icons/fa";
 import { FaLocationDot, FaXTwitter } from "react-icons/fa6";
-import Swal from "sweetalert2";
+import { FaCheckCircle } from "react-icons/fa";
+// import Swal from "sweetalert2";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { FallingLines } from "react-loader-spinner";
 
 const Contact = () => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        Swal.fire({
-            text: "Successfully submitted you query, I will response as soon as possible",
-            icon: "success"
-          });
-    }
+  const form = useRef();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const sendEmail = (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    emailjs
+      .sendForm(
+        "service_1zl6kff",
+        "contact_form",
+        form.current,
+        "OVLYdjI_Ewxt6ZVRh"
+      )
+      .then(
+        (result) => {
+          console.log(result);
+          setLoading(false);
+          setSuccess(true);
+        },
+        (error) => {
+          console.log(error.text);
+          setLoading(false);
+          setSuccess(false);
+        }
+      );
+
+    
+    form.current.reset();
+  };
   return (
     <>
-      <section id="#contact" className="pb-12">
+      <section className="pb-12">
         <h2 className="text-4xl font-extrabold pb-10">
           <span className="text-green-500">Get</span> In Touch
         </h2>
@@ -34,10 +62,12 @@ const Contact = () => {
               me.
             </p>
             <ul className="space-y-3">
-              <li className="min-w-min">
+              <li>
                 <a
-                  className="flex gap-2 items-center hover:text-gray-400"
-                  href="https://maps.app.goo.gl/Q52ZTRhtppgtE9NT7" target="_blank" rel="noreferrer"
+                  className="flex w-max gap-2 items-center hover:text-gray-400"
+                  href="https://maps.app.goo.gl/Q52ZTRhtppgtE9NT7"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <FaLocationDot />
                   <span>Madan, Netrokona, Mymensingh</span>
@@ -45,8 +75,10 @@ const Contact = () => {
               </li>
               <li>
                 <a
-                  className="flex gap-2 items-center hover:text-gray-400"
-                  href="mailto:s163.tamim@gmail.com" target="_blank" rel="noreferrer"
+                  className="flex w-max gap-2 items-center hover:text-gray-400"
+                  href="mailto:s163.tamim@gmail.com"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <FaEnvelope />
                   <span>s163.tamim@gmail.com</span>
@@ -54,8 +86,10 @@ const Contact = () => {
               </li>
               <li>
                 <a
-                  className="flex gap-2 items-center hover:text-gray-400"
-                  href="https://github.com/protamim" target="_blank" rel="noreferrer"
+                  className="flex w-max gap-2 items-center hover:text-gray-400"
+                  href="https://github.com/protamim"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <FaGithub />
                   <span>protamim</span>
@@ -63,8 +97,10 @@ const Contact = () => {
               </li>
               <li>
                 <a
-                  className="flex gap-2 items-center hover:text-gray-400"
-                  href="https://twitter.com/talukdar_32" target="_blank" rel="noreferrer"
+                  className="flex w-max gap-2 items-center hover:text-gray-400"
+                  href="https://twitter.com/talukdar_32"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <FaXTwitter />
                   <span>protamim</span>
@@ -72,8 +108,10 @@ const Contact = () => {
               </li>
               <li>
                 <a
-                  className="flex gap-2 items-center hover:text-gray-400"
-                  href="https://www.facebook.com/protamim32/" target="_blank" rel="noreferrer"
+                  className="flex w-max gap-2 items-center hover:text-gray-400"
+                  href="https://www.facebook.com/protamim32/"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <FaFacebook />
                   <span>protamim32</span>
@@ -81,35 +119,61 @@ const Contact = () => {
               </li>
             </ul>
           </div>
-          <div className="w-full md:w-2/4">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <input
-                  className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3"
-                  type="text"
-                  placeholder="Name"
+          {/* Form Area */}
+          {loading ? (
+            <>
+              <div className="self-center mx-auto">
+                <FallingLines
+                  color="#4fa94d"
+                  width="100"
+                  visible={true}
+                  ariaLabel="falling-lines-loading"
                 />
               </div>
-              <div>
+            </>
+          ) : success ? (
+            <div className="self-center mx-auto">
+              <h2 className="flex items-center flex-col gap-2">
+                <FaCheckCircle className="text-2xl text-green-500" />
+                <span>Message Sent!</span>
+              </h2>
+            </div>
+          ) : (
+            <div id="contact" className="w-full md:w-2/4">
+              <form ref={form} onSubmit={sendEmail} className="space-y-6">
+                <div>
+                  <input
+                    className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3"
+                    type="text"
+                    placeholder="Name"
+                    name="user_name"
+                  />
+                </div>
+                <div>
+                  <input
+                    className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3"
+                    type="email"
+                    placeholder="Email"
+                    name="user_email"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3 min-h-[160px]"
+                    placeholder="Message"
+                    name="message"
+                  ></textarea>
+                </div>
                 <input
-                  className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3"
-                  type="email"
-                  placeholder="Email"
+                  className="cursor-pointer border-green-500 border px-5 py-2 hover:bg-green-500 hover:text-black"
+                  type="submit"
+                  value="Send Message"
                 />
-              </div>
-              <div>
-                <textarea
-                  className="w-full bg-zinc-800 rounded-md outline-none border border-gray-500 py-2 px-3 min-h-[160px]"
-                  placeholder="Message"
-                ></textarea>
-              </div>
-              <input
-                className="cursor-pointer border-green-500 border px-5 py-2 hover:bg-green-500 hover:text-black"
-                type="button"
-                value="Send Message"
-              />
-            </form>
-          </div>
+              </form>
+            </div>
+          )}
+
+          {/* // form area end */}
         </div>
       </section>
     </>
