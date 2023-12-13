@@ -1,7 +1,7 @@
 import workplace from "../assets/workplace.jpg";
 import { FaDownload, FaFacebook, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import ExampleFileDownload from "../../public/assignment_category_0001.pdf";
+import resume from "../../public/resume_tamim_talukdar.pdf";
 import { TypeAnimation } from "react-type-animation";
 
 const Banner = () => {
@@ -123,8 +123,8 @@ const Banner = () => {
             <div className="flex gap-8 mt-5">
               <a
                 className=" flex gap-3 items-center border border-green-600 py-2 px-5 rounded-full hover:bg-green-600 hover:text-black transition-all"
-                href={ExampleFileDownload}
-                download="Example-PDF-document"
+                href={resume}
+                download="resume_tamim_talukdar"
                 target="_blank"
                 rel="noreferrer"
               >
