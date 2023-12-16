@@ -71,7 +71,7 @@ const Banner = () => {
               </h2>
               <div className="flex gap-3">
                 <a
-                  className="text-xl"
+                  className="text-xl hover:text-gray-400 transition-all"
                   href="https://github.com/protamim"
                   target="_blank"
                   rel="noreferrer"
@@ -79,7 +79,7 @@ const Banner = () => {
                   <FaGithub />
                 </a>
                 <a
-                  className="text-xl"
+                  className="text-xl hover:text-gray-400 transition-all"
                   href="https://www.linkedin.com/in/tamim-talukdar-35a5a2287/"
                   target="_blank"
                   rel="noreferrer"
@@ -87,7 +87,7 @@ const Banner = () => {
                   <FaLinkedinIn />
                 </a>
                 <a
-                  className="text-xl"
+                  className="text-xl hover:text-gray-400 transition-all"
                   href="https://www.facebook.com/protamim32/"
                   target="_blank"
                   rel="noreferrer"
@@ -95,7 +95,7 @@ const Banner = () => {
                   <FaFacebook />
                 </a>
                 <a
-                  className="text-xl"
+                  className="text-xl hover:text-gray-400 transition-all"
                   href="https://twitter.com/talukdar_32"
                   target="_blank"
                   rel="noreferrer"
